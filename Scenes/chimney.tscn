@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://btlo4xuyt24ht"]
+
+[ext_resource type="Script" uid="uid://c27n2k7k2j0cc" path="res://Scripts/chimney.gd" id="1_8wnls"]
+[ext_resource type="PackedScene" uid="uid://orb2ddc52saq" path="res://Scenes/platform.tscn" id="2_fo0e7"]
+[ext_resource type="PackedScene" uid="uid://cut3ual7jmcw1" path="res://Scenes/falling_object_spawner.tscn" id="3_no4au"]
+[ext_resource type="PackedScene" uid="uid://c5hwycoo3prt1" path="res://Scenes/player.tscn" id="4_8k3dp"]
+[ext_resource type="Texture2D" uid="uid://d1oikvhrjfkdu" path="res://Textures/icon.svg" id="5_0i4y8"]
+[ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="6_ohpam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ah8b"]
+size = Vector2(1354.5, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
+size = Vector2(151, 1975)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohpam"]
+size = Vector2(1335, 130)
+
+[node name="Chimney" type="Node2D" unique_id=563581599 node_paths=PackedStringArray("_player")]
+script = ExtResource("1_8wnls")
+_player = NodePath("Player")
+
+[node name="Platform" parent="." unique_id=1567637058 instance=ExtResource("2_fo0e7")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=928503598]
+anchor_mode = 0
+
+[node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 instance=ExtResource("3_no4au")]
+position = Vector2(511, -1136)
+
+[node name="KillFloor" type="Area2D" parent="Camera2D" unique_id=22614952]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/KillFloor" unique_id=52563764]
+position = Vector2(570, 738)
+shape = SubResource("RectangleShape2D_4ah8b")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Camera2D" unique_id=1576573283]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RigidBody2D" unique_id=987208858]
+position = Vector2(-78, -124.5)
+shape = SubResource("RectangleShape2D_44lo8")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Camera2D" unique_id=1777621992]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RigidBody2D2" unique_id=33748576]
+position = Vector2(1232, -113)
+shape = SubResource("RectangleShape2D_44lo8")
+
+[node name="Player" parent="." unique_id=1440466538 instance=ExtResource("4_8k3dp")]
+position = Vector2(516, 181)
+_jump_velocity = -900.0
+
+[node name="TestGround" type="StaticBody2D" parent="." unique_id=1272562330 groups=["Platform"]]
+position = Vector2(200, 352)
+
+[node name="Sprite2D" type="Sprite2D" parent="TestGround" unique_id=1928263607]
+position = Vector2(319.5, 0)
+scale = Vector2(10.592, 1)
+texture = ExtResource("5_0i4y8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestGround" unique_id=2071703199]
+position = Vector2(326.5, 2)
+shape = SubResource("RectangleShape2D_ohpam")
+
+[node name="Enemy" parent="." unique_id=733030718 instance=ExtResource("6_ohpam")]
+position = Vector2(521, -542)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-256, -256)])
+
+[node name="Enemy2" parent="." unique_id=1875862296 instance=ExtResource("6_ohpam")]
+position = Vector2(677, -918)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-512, 0)])
+
+[node name="Enemy3" parent="." unique_id=821383388 instance=ExtResource("6_ohpam")]
+position = Vector2(340, -1534)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(512, 0)])
+
+[node name="Enemy4" parent="." unique_id=1535227577 instance=ExtResource("6_ohpam")]
+position = Vector2(727, -1923)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-256, 512), Vector2(256, 1024)])

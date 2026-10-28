@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bve40vqpf3w45"]
+
+[ext_resource type="Texture2D" uid="uid://d1oikvhrjfkdu" path="res://Textures/icon.svg" id="1_22pc6"]
+[ext_resource type="PackedScene" uid="uid://c5hwycoo3prt1" path="res://Scenes/player.tscn" id="2_m6x4v"]
+[ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="3_rwcgd"]
+[ext_resource type="PackedScene" uid="uid://cut3ual7jmcw1" path="res://Scenes/falling_object_spawner.tscn" id="4_ydumu"]
+[ext_resource type="Texture2D" uid="uid://d38y567y61aqq" path="res://Textures/background.png" id="5_47m5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdhvw"]
+size = Vector2(767, 130)
+
+[node name="CKPlayScene" type="Node2D" unique_id=695241957]
+
+[node name="TestGround" type="StaticBody2D" parent="." unique_id=2076813103 groups=["Platform"]]
+position = Vector2(-226, 181)
+
+[node name="Sprite2D" type="Sprite2D" parent="TestGround" unique_id=702762026]
+position = Vector2(319.5, 0)
+scale = Vector2(5.9921875, 1)
+texture = ExtResource("1_22pc6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestGround" unique_id=262167001]
+position = Vector2(319.5, 2)
+shape = SubResource("RectangleShape2D_jdhvw")
+
+[node name="tempcam" type="Camera2D" parent="." unique_id=798930607]
+
+[node name="Player" parent="." unique_id=1440466538 instance=ExtResource("2_m6x4v")]
+
+[node name="Enemy" parent="." unique_id=1764939553 instance=ExtResource("3_rwcgd")]
+position = Vector2(185, 23)
+
+[node name="PlatformSpawner" parent="." unique_id=302635137 instance=ExtResource("4_ydumu")]
+position = Vector2(1, -322)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=275785564 groups=["Platform", "Player"]]
+visible = false
+z_index = -1
+scale = Vector2(2, 2)
+texture = ExtResource("5_47m5w")

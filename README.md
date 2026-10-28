@@ -1,2 +1,2 @@
-# GameJamGame2026_10_21
+# Game Jam Game 2026_10_21
 

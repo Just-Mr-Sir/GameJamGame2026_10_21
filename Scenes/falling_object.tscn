@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dp7r1dua04v08"]
+
+[ext_resource type="Script" uid="uid://4t4ykcfc7g70" path="res://Scripts/falling_object.gd" id="1_yw4xl"]
+[ext_resource type="Texture2D" uid="uid://bryy3ugixdnv4" path="res://Textures/ordament1.png" id="2_yw4xl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdhvw"]
+radius = 32.0
+
+[node name="FallingObject" type="Area2D" unique_id=2006569717]
+script = ExtResource("1_yw4xl")
+_hit_filters = Array[String](["Player", "Platform"])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=109958813]
+texture = ExtResource("2_yw4xl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=614354669]
+shape = SubResource("CircleShape2D_jdhvw")

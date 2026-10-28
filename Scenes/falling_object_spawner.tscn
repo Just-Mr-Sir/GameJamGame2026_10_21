@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cut3ual7jmcw1"]
+
+[ext_resource type="Script" uid="uid://cntrmgold7q1k" path="res://Scripts/platform_spawner.gd" id="1_bqll0"]
+[ext_resource type="PackedScene" uid="uid://dp7r1dua04v08" path="res://Scenes/falling_object.tscn" id="2_fokkj"]
+
+[node name="FallingObjectSpawner" type="Node2D" unique_id=302635137]
+script = ExtResource("1_bqll0")
+_falling_objects = Array[PackedScene]([ExtResource("2_fokkj")])
+_flat_spawntime = 2.0
+_spawn_area_width = 1028.0

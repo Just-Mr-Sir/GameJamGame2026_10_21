@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cq31dnv6jymvt" path="res://Scripts/knockback_module.gd" id="2_afpow"]
 [ext_resource type="Texture2D" uid="uid://cudrdv2nwwbko" path="res://Textures/turkey1.png" id="3_287tu"]
 [ext_resource type="Texture2D" uid="uid://cjywf526ptw73" path="res://Textures/turkey2.png" id="4_0830c"]
+[ext_resource type="Script" uid="uid://38d1df1lxe8s" path="res://Scripts/enemy_anim.gd" id="5_0830c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1f0kj"]
 animations = [{
@@ -28,6 +29,7 @@ size = Vector2(10, 64)
 [node name="Enemy" type="Area2D" unique_id=733030718]
 script = ExtResource("1_1f0kj")
 _speed = 128.0
+_waypoint_pause_length = 5.0
 
 [node name="KnockbackModule" type="Node2D" parent="." unique_id=514324894 node_paths=PackedStringArray("_area2d")]
 script = ExtResource("2_afpow")
@@ -38,6 +40,8 @@ _bounce_force = 200.0
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=555842820]
 sprite_frames = SubResource("SpriteFrames_1f0kj")
 animation = &"turkey"
+script = ExtResource("5_0830c")
+_idle_anim_name = "turkey"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292482613]
 position = Vector2(0, 5)

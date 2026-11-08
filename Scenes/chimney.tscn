@@ -52,12 +52,13 @@ size = Vector2(1335, 130)
 script = ExtResource("1_8wnls")
 _player = NodePath("Player")
 _platform_scene = ExtResource("2_fo0e7")
+_speed_per_second_increase = 0.5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=928503598]
 anchor_mode = 0
 
 [node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 instance=ExtResource("3_no4au")]
-position = Vector2(511, -1136)
+position = Vector2(511, 0)
 
 [node name="KillFloor" type="Area2D" parent="Camera2D" unique_id=22614952]
 position = Vector2(570, 635)
@@ -75,14 +76,22 @@ sprite_frames = SubResource("SpriteFrames_jdhvw")
 autoplay = "default"
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Camera2D" unique_id=1576573283]
+position = Vector2(2, 0)
+collision_mask = 0
 gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RigidBody2D" unique_id=987208858]
 position = Vector2(-78, -124.5)
 shape = SubResource("RectangleShape2D_44lo8")
 
 [node name="RigidBody2D2" type="RigidBody2D" parent="Camera2D" unique_id=1777621992]
+position = Vector2(-5, 0)
+collision_mask = 0
 gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RigidBody2D2" unique_id=33748576]
 position = Vector2(1232, -113)
@@ -100,7 +109,7 @@ script = ExtResource("7_ght4j")
 _camera = NodePath("..")
 
 [node name="Player" parent="." unique_id=1440466538 instance=ExtResource("4_8k3dp")]
-position = Vector2(516, 181)
+position = Vector2(516, 324)
 
 [node name="TestGround" type="StaticBody2D" parent="." unique_id=1272562330 groups=["Platform"]]
 position = Vector2(553, 448)

@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name PlayerMove
 
 @export var _anim_sprite:AnimatedSprite2D
+@export var _confusion_sprite:Sprite2D
 @export var _max_speed:float
 @export var _ground_acceleration:float
 @export var _airborne_acceleration:float
@@ -27,6 +28,8 @@ func _physics_process(delta: float) -> void:
 	
 	if !_is_dead:
 		if !_is_bounced && _cur_stun_time < 0:
+			_confusion_sprite.visible = false
+			
 			# Handle jumping
 			if Input.is_action_just_pressed("Jump") and is_on_floor():
 				_cur_gravity = _max_jump_gravity
@@ -81,6 +84,7 @@ func try_stop_bounced():
 
 func stun():
 	_cur_stun_time = _time_stunned
+	_confusion_sprite.visible = true
 
 func die():
 	if _is_dead:

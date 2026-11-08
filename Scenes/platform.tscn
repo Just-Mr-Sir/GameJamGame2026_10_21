@@ -15,3 +15,4 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=308672746]
 position = Vector2(113.5, 32)
 shape = SubResource("RectangleShape2D_4ah8b")
+one_way_collision = true

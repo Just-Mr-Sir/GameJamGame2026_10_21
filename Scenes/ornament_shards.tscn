@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://bkrhvnlpcfa8w"]
+
+[ext_resource type="Script" uid="uid://8mojvn47h7ac" path="res://Scripts/shards.gd" id="1_yh8o3"]
+[ext_resource type="Texture2D" uid="uid://iov5s1nsygbc" path="res://Textures/ornament1_shards_spritesheet.png" id="2_yh8o3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdhvw"]
+
+[node name="OrnamentShards" type="Node2D" unique_id=1356513760]
+script = ExtResource("1_yh8o3")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1869754325]
+position = Vector2(-6, 9)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=478052384]
+texture = ExtResource("2_yh8o3")
+offset = Vector2(6.32, -9.05)
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=795403936]
+shape = SubResource("CircleShape2D_jdhvw")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="." unique_id=430885744]
+position = Vector2(6, 10)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2" unique_id=904672139]
+texture = ExtResource("2_yh8o3")
+offset = Vector2(-5.215, -10.425)
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2" unique_id=304617045]
+shape = SubResource("CircleShape2D_jdhvw")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="." unique_id=1422636166]
+position = Vector2(14, 2)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3" unique_id=1474524792]
+texture = ExtResource("2_yh8o3")
+offset = Vector2(-14.27, -2.72)
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3" unique_id=1877997597]
+shape = SubResource("CircleShape2D_jdhvw")
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="." unique_id=1579989251]
+position = Vector2(-9, -3)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4" unique_id=46783089]
+texture = ExtResource("2_yh8o3")
+offset = Vector2(9.125, 3.265)
+region_enabled = true
+region_rect = Rect2(64, 64, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4" unique_id=1704885232]
+shape = SubResource("CircleShape2D_jdhvw")
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="." unique_id=632906361]
+position = Vector2(1, -14)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D5" unique_id=1487225493]
+texture = ExtResource("2_yh8o3")
+offset = Vector2(-0.745, 13.99)
+region_enabled = true
+region_rect = Rect2(0, 128, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D5" unique_id=1842802523]
+shape = SubResource("CircleShape2D_jdhvw")
+
+[node name="RigidBody2D6" type="RigidBody2D" parent="." unique_id=1089444779]
+position = Vector2(12, -8)
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D6" unique_id=1230649173]
+texture = ExtResource("2_yh8o3")
+offset = Vector2(-11.945, 7.98)
+region_enabled = true
+region_rect = Rect2(64, 128, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D6" unique_id=1294371798]
+shape = SubResource("CircleShape2D_jdhvw")

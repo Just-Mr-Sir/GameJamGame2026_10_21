@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var _player:Node2D
+@export var _platform_scene:PackedScene
 const speed = 50
 const jumpheight = 140
 var platform
@@ -10,7 +11,6 @@ var platformlist: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	platform = get_node("Platform")
 	camera = get_node("Camera2D")
 	var nplatforms = floor(camera.get_viewport_rect().size.y / jumpheight)
 	for i in nplatforms:
@@ -38,8 +38,7 @@ func free_below_camera():
 			_player.queue_free()
 
 func generate_platform(y):
-	var newplatform = platform.duplicate()
-	newplatform.visible = true
+	var newplatform = _platform_scene.instantiate()
 	newplatform.position.y = y
 	newplatform.position.x = randi_range(0, \
 		camera.get_viewport_rect().size.x - newplatform.find_child("PlatformSprite").texture.get_width())

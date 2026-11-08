@@ -50,9 +50,7 @@ size = Vector2(1335, 130)
 [node name="Chimney" type="Node2D" unique_id=563581599 node_paths=PackedStringArray("_player")]
 script = ExtResource("1_8wnls")
 _player = NodePath("Player")
-
-[node name="Platform" parent="." unique_id=1567637058 instance=ExtResource("2_fo0e7")]
-visible = false
+_platform_scene = ExtResource("2_fo0e7")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=928503598]
 anchor_mode = 0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2vjtptylsmt2"
-path="res://.godot/imported/diesanta2.png-6134f2ede6fe64466d3cb601dda69c76.ctex"
+uid="uid://vv4t1tsqf2bl"
+path="res://.godot/imported/neutral santa2.png-62a3c4ce7aa8d5522c6f79a9e87fa323.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/santa die/diesanta2.png"
-dest_files=["res://.godot/imported/diesanta2.png-6134f2ede6fe64466d3cb601dda69c76.ctex"]
+source_file="res://Textures/santa_idle/neutral santa2.png"
+dest_files=["res://.godot/imported/neutral santa2.png-62a3c4ce7aa8d5522c6f79a9e87fa323.ctex"]
 
 [params]
 

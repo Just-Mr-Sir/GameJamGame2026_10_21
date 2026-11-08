@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpa0kx6k6ogbe"
-path="res://.godot/imported/walksanta2.png-ad1a0114453d7ed3a81e95bac7c1744f.ctex"
+uid="uid://bi64mmqwo1lxt"
+path="res://.godot/imported/neutral santa.png-64dbb3372f73347f4d466e85aa76b92d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/santa walk/walksanta2.png"
-dest_files=["res://.godot/imported/walksanta2.png-ad1a0114453d7ed3a81e95bac7c1744f.ctex"]
+source_file="res://Textures/santa_idle/neutral santa.png"
+dest_files=["res://.godot/imported/neutral santa.png-64dbb3372f73347f4d466e85aa76b92d.ctex"]
 
 [params]
 

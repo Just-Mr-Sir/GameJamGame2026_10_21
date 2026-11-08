@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cw4kym8c6r3ub"
-path="res://.godot/imported/diesanta.png-2f2ca804f4546ce78e584cb4bd08d4bb.ctex"
+path="res://.godot/imported/diesanta.png-277e949232644119c99983a46e5715bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/santa die/diesanta.png"
-dest_files=["res://.godot/imported/diesanta.png-2f2ca804f4546ce78e584cb4bd08d4bb.ctex"]
+source_file="res://Textures/santa_die/diesanta.png"
+dest_files=["res://.godot/imported/diesanta.png-277e949232644119c99983a46e5715bd.ctex"]
 
 [params]
 

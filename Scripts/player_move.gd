@@ -25,41 +25,40 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta * _cur_gravity
 	
-	if _is_dead:
-		return
-	
-	if !_is_bounced && _cur_stun_time < 0:
-		# Handle jumping
-		if Input.is_action_just_pressed("Jump") and is_on_floor():
-			_cur_gravity = _max_jump_gravity
-			velocity.y -= _jump_force
-		elif Input.is_action_pressed("Jump") && velocity.y < 0:
-			_cur_gravity = max(_min_jump_gravity,
-				_cur_gravity - _gravity_lose_rate)
-		else:
-			_cur_gravity = _normal_gravity
-		
-		# Get the input direction and handle the movement/deceleration.
-		var direction := Input.get_axis("MoveLeft", "MoveRight")
-		var acc:float = (_ground_acceleration if is_on_floor()
-			else _airborne_acceleration)
-		
-		if direction:
-			velocity.x = min(
-				_max_speed,
-				velocity.x + direction*acc
-			)
-			if direction < 0:
-				_anim_sprite.flip_h = true
+	if !_is_dead:
+		if !_is_bounced && _cur_stun_time < 0:
+			# Handle jumping
+			if Input.is_action_just_pressed("Jump") and is_on_floor():
+				_cur_gravity = _max_jump_gravity
+				velocity.y -= _jump_force
+			elif Input.is_action_pressed("Jump") && velocity.y < 0:
+				_cur_gravity = max(_min_jump_gravity,
+					_cur_gravity - _gravity_lose_rate)
 			else:
-				_anim_sprite.flip_h = false
-		else:
-			#slow down to a stop
-			velocity.x = move_toward(velocity.x, 0, 20.)
+				_cur_gravity = _normal_gravity
+			
+			# Get the input direction and handle the movement/deceleration.
+			var direction := Input.get_axis("MoveLeft", "MoveRight")
+			var acc:float = (_ground_acceleration if is_on_floor()
+				else _airborne_acceleration)
+			
+			if direction:
+				velocity.x = min(
+					_max_speed,
+					velocity.x + direction*acc
+				)
+				if direction < 0:
+					_anim_sprite.flip_h = true
+				else:
+					_anim_sprite.flip_h = false
+			else:
+				#slow down to a stop
+				velocity.x = move_toward(velocity.x, 0, 20.)
+		
+		play_animations()
 	
 	move_and_slide()
 	try_stop_bounced()
-	play_animations()
 
 func play_animations():
 	if Input.is_action_just_pressed("Jump"):
@@ -84,5 +83,11 @@ func stun():
 	_cur_stun_time = _time_stunned
 
 func die():
+	if _is_dead:
+		return
+	
 	_is_dead = true
 	_anim_sprite.play("death")
+	#for a "fun" death bounce
+	velocity.y = -500
+	_cur_gravity = _normal_gravity

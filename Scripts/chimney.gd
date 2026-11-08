@@ -25,6 +25,9 @@ func _process(delta):
 	if camera.position.y - jumpheight * 2 <= -nextplatform:
 		generate_platform(-nextplatform)
 		nextplatform += jumpheight
+
+#DEPRECATED
+func free_below_camera():
 	for i in platformlist:
 		if i.position.y >= camera.get_viewport_rect().size.y + camera.position.y:
 			platformlist.erase(i)

@@ -2,8 +2,15 @@ extends Node2D
 
 @export var _player:Node2D
 @export var _platform_scene:PackedScene
-const speed = 50
+@export var _speed_per_second_increase:float
+
+const base_speed = 50
 const jumpheight = 140
+
+var speed:float:
+	get:
+		return base_speed + speed_mod
+var speed_mod = 0
 var platform
 var camera: Camera2D
 var nextplatform
@@ -12,7 +19,7 @@ var platformlist: Array
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	camera = get_node("Camera2D")
-	var nplatforms = floor(camera.get_viewport_rect().size.y / jumpheight)
+	var nplatforms = floor(camera.get_viewport_rect().size.y / jumpheight)-1
 	for i in nplatforms:
 		generate_platform(camera.position.y + jumpheight * i)
 	nextplatform = jumpheight
@@ -25,6 +32,9 @@ func _process(delta):
 	if camera.position.y - jumpheight * 2 <= -nextplatform:
 		generate_platform(-nextplatform)
 		nextplatform += jumpheight
+	
+	#increase speed of camera movement
+	speed_mod += _speed_per_second_increase * delta
 
 #DEPRECATED
 func free_below_camera():

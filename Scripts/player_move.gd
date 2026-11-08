@@ -95,3 +95,4 @@ func die():
 	#for a "fun" death bounce
 	velocity.y = -500
 	_cur_gravity = _normal_gravity
+	velocity.x = 0

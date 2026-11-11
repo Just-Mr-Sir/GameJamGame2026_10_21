@@ -6,6 +6,8 @@
 size = Vector2(225, 64)
 
 [node name="RigidBody2D" type="StaticBody2D" unique_id=611285106 groups=["Platform"]]
+collision_layer = 2
+collision_mask = 0
 
 [node name="PlatformSprite" type="Sprite2D" parent="." unique_id=1607284367]
 self_modulate = Color(1, 0.45566672, 0.29000002, 1)

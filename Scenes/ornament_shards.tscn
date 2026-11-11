@@ -12,6 +12,7 @@ _time_until_trans_start = 3.0
 [node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=1869754325]
 position = Vector2(-6, 9)
 collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" unique_id=478052384]
@@ -26,6 +27,7 @@ shape = SubResource("CircleShape2D_jdhvw")
 [node name="RigidBody2D2" type="RigidBody2D" parent="." unique_id=430885744]
 position = Vector2(6, 10)
 collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2" unique_id=904672139]
@@ -40,6 +42,7 @@ shape = SubResource("CircleShape2D_jdhvw")
 [node name="RigidBody2D3" type="RigidBody2D" parent="." unique_id=1422636166]
 position = Vector2(14, 2)
 collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3" unique_id=1474524792]
@@ -54,6 +57,7 @@ shape = SubResource("CircleShape2D_jdhvw")
 [node name="RigidBody2D4" type="RigidBody2D" parent="." unique_id=1579989251]
 position = Vector2(-9, -3)
 collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4" unique_id=46783089]
@@ -68,6 +72,7 @@ shape = SubResource("CircleShape2D_jdhvw")
 [node name="RigidBody2D5" type="RigidBody2D" parent="." unique_id=632906361]
 position = Vector2(1, -14)
 collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D5" unique_id=1487225493]
@@ -82,6 +87,7 @@ shape = SubResource("CircleShape2D_jdhvw")
 [node name="RigidBody2D6" type="RigidBody2D" parent="." unique_id=1089444779]
 position = Vector2(12, -8)
 collision_layer = 0
+collision_mask = 2
 gravity_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D6" unique_id=1230649173]

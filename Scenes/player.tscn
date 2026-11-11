@@ -137,6 +137,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1440466538 node_paths=PackedStringArray("_anim_sprite", "_confusion_sprite") groups=["Player"]]
+collision_mask = 3
 script = ExtResource("1_cvnsp")
 _anim_sprite = NodePath("Sprite2D")
 _confusion_sprite = NodePath("SpriteConfusion")

@@ -8,6 +8,7 @@
 radius = 32.0
 
 [node name="FallingObject" type="Area2D" unique_id=2006569717]
+collision_mask = 3
 script = ExtResource("1_yw4xl")
 _hit_filters = Array[String](["Player", "Platform"])
 _shards_scene = ExtResource("2_q4kea")

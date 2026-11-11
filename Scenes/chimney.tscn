@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://chlladqyrc7qq" path="res://Scripts/scrolling_background.gd" id="7_ght4j"]
 [ext_resource type="Texture2D" uid="uid://u3qx11iyvf6g" path="res://Textures/brick.png" id="9_mntma"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
+size = Vector2(151, 1975)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ah8b"]
 size = Vector2(1354.5, 144)
 
@@ -42,38 +45,28 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
-size = Vector2(151, 1975)
+[sub_resource type="Gradient" id="Gradient_mntma"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jdhvw"]
+gradient = SubResource("Gradient_mntma")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohpam"]
 size = Vector2(1335, 130)
 
-[node name="Chimney" type="Node2D" unique_id=563581599 node_paths=PackedStringArray("_player")]
+[node name="Chimney" type="Node2D" unique_id=563581599 node_paths=PackedStringArray("_player", "_killing_floor")]
 script = ExtResource("1_8wnls")
 _player = NodePath("Player")
+_killing_floor = NodePath("KillFloor")
 _platform_scene = ExtResource("2_fo0e7")
-_speed_per_second_increase = 0.5
+_speed_per_second_increase = 0.05
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=928503598]
 anchor_mode = 0
 
 [node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 instance=ExtResource("3_no4au")]
 position = Vector2(511, 0)
-
-[node name="KillFloor" type="Area2D" parent="Camera2D" unique_id=22614952]
-position = Vector2(570, 635)
-script = ExtResource("4_ioog0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/KillFloor" unique_id=52563764]
-z_index = 1
-position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_4ah8b")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Camera2D/KillFloor" unique_id=1758700758]
-position = Vector2(0, -45)
-scale = Vector2(1.2, 0.3)
-sprite_frames = SubResource("SpriteFrames_jdhvw")
-autoplay = "default"
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Camera2D" unique_id=1576573283]
 position = Vector2(2, 0)
@@ -108,6 +101,29 @@ region_rect = Rect2(0, 0, 1536, 1024)
 script = ExtResource("7_ght4j")
 _camera = NodePath("..")
 
+[node name="KillFloor" type="Area2D" parent="." unique_id=22614952]
+position = Vector2(570, 635)
+script = ExtResource("4_ioog0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillFloor" unique_id=52563764]
+visible = false
+z_index = 1
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_4ah8b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="KillFloor" unique_id=1758700758]
+z_index = 1
+position = Vector2(0, -45)
+scale = Vector2(1.2, 0.3)
+sprite_frames = SubResource("SpriteFrames_jdhvw")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="KillFloor" unique_id=325410267]
+z_index = 1
+position = Vector2(0, 394.99997)
+scale = Vector2(18.725, 11.575)
+texture = SubResource("GradientTexture2D_jdhvw")
+
 [node name="Player" parent="." unique_id=1440466538 instance=ExtResource("4_8k3dp")]
 position = Vector2(516, 324)
 
@@ -141,5 +157,5 @@ _rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(512, 0)])
 position = Vector2(727, -1923)
 _rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-256, 512), Vector2(256, 1024)])
 
-[connection signal="body_entered" from="Camera2D/KillFloor" to="Camera2D/KillFloor" method="_on_body_entered"]
-[connection signal="body_exited" from="Camera2D/KillFloor" to="Camera2D/KillFloor" method="_on_body_exited"]
+[connection signal="body_entered" from="KillFloor" to="KillFloor" method="_on_body_entered"]
+[connection signal="body_exited" from="KillFloor" to="KillFloor" method="_on_body_exited"]

@@ -3,13 +3,173 @@
 [ext_resource type="Script" uid="uid://qp5tc5v057uy" path="res://Scripts/game_manager.gd" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://b453ounaypvu3" path="res://Scenes/play_scene.tscn" id="1_x87qo"]
 [ext_resource type="Script" uid="uid://ox8bcosie5w4" path="res://Scripts/pause_ui.gd" id="3_6h5vk"]
+[ext_resource type="AudioStream" uid="uid://b4nclsvi4tsra" path="res://Sounds/dragon-studio-door-slam-478362.mp3" id="4_1ixah"]
+[ext_resource type="AudioStream" uid="uid://d3qros5t17y3e" path="res://Sounds/alex_jauk-santa-laugh-02-279694.mp3" id="5_rgj8m"]
+
+[sub_resource type="Animation" id="Animation_6h5vk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRectLeft:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRectRight:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/VBoxContainer/Label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/VBoxContainer/Label2:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamDoorSlam:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamSantaLaugh:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fiftr"]
+resource_name = "death_screen"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRectLeft:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(600, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRectRight:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(600, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/VBoxContainer/Label:self_modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 2.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/VBoxContainer/Label2:self_modulate")
+tracks/3/interp = 0
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamDoorSlam:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamSantaLaugh:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ixah"]
+_data = {
+&"RESET": SubResource("Animation_6h5vk"),
+&"death_screen": SubResource("Animation_fiftr")
+}
 
 [node name="GameScene" type="Node2D" unique_id=563581599]
 
-[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_play_scene", "_pause_ui")]
+[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_play_scene", "_pause_ui", "_death_ui")]
 script = ExtResource("1_b6fju")
 _play_scene = NodePath("../PlayScene")
 _pause_ui = NodePath("../PauseUI")
+_death_ui = NodePath("../DeathUI")
 
 [node name="PlayScene" parent="." unique_id=114986873 instance=ExtResource("1_x87qo")]
 
@@ -30,3 +190,64 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 40
 text = "PAUSED"
 horizontal_alignment = 1
+
+[node name="DeathUI" type="CanvasLayer" parent="." unique_id=354209970]
+
+[node name="AudioStreamDoorSlam" type="AudioStreamPlayer2D" parent="DeathUI" unique_id=1496685053]
+stream = ExtResource("4_1ixah")
+volume_db = 5.0
+
+[node name="AudioStreamSantaLaugh" type="AudioStreamPlayer2D" parent="DeathUI" unique_id=452314425]
+stream = ExtResource("5_rgj8m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DeathUI" unique_id=577581573]
+libraries/ = SubResource("AnimationLibrary_1ixah")
+
+[node name="CenterContainer" type="CenterContainer" parent="DeathUI" unique_id=1770255174]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathUI/CenterContainer" unique_id=1878404339]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DeathUI/CenterContainer/VBoxContainer" unique_id=2123297259]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.23921569, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(1, 0.23921569, 0.23921569, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "SANTA IS DEAD
+CHRISTMAS IS RUINED"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="DeathUI/CenterContainer/VBoxContainer" unique_id=485787692]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "
+'R' to Restart"
+horizontal_alignment = 1
+
+[node name="ColorRectLeft" type="ColorRect" parent="DeathUI" unique_id=84979446]
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRectRight" type="ColorRect" parent="DeathUI" unique_id=1634646458]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

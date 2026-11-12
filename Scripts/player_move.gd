@@ -17,9 +17,12 @@ var _cur_stun_time:float
 var _cur_gravity:float
 var _is_bounced:bool = false
 var _is_dead:bool = false
+var _death_timer:float = 1.
 
 func _process(delta:float):
 	_cur_stun_time -= delta
+	
+	_death_countdown(delta)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -94,6 +97,15 @@ func stun():
 	_cur_stun_time = _time_stunned
 	_confusion_sprite.visible = true
 
+func _death_countdown(delta:float):
+	if !_is_dead:
+		return
+	
+	_death_timer -= delta
+	
+	if _death_timer < 0:
+		GameManager.Instance.game_over()
+
 func die():
 	if _is_dead:
 		return
@@ -104,3 +116,4 @@ func die():
 	velocity.y = -500
 	_cur_gravity = _normal_gravity
 	velocity.x = 0
+	$AudioStreamPlayer2D.playing = true

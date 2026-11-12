@@ -13,6 +13,7 @@ var Play_Scene:Node2D:
 @export var _play_scene:Node2D
 @export var _pause_ui:PauseUI
 @export var _death_ui:DeathUI
+@export var _background_music:AudioStreamPlayer
 
 var _is_game_over:bool = false
 
@@ -38,3 +39,5 @@ func pause_game(do_pause:bool):
 		
 	if _pause_ui:
 		_pause_ui.visible = do_pause
+	
+	_background_music.playing = !do_pause

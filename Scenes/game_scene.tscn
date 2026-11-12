@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://qp5tc5v057uy" path="res://Scripts/game_manager.gd" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://b453ounaypvu3" path="res://Scenes/play_scene.tscn" id="1_x87qo"]
+[ext_resource type="AudioStream" uid="uid://buxhhln1sjig0" path="res://Sounds/melodyayresgriffiths-carol-of-the-bells-xmas-halloween-spooky-creepy-christmas-scrooge-171664.mp3" id="2_7iton"]
 [ext_resource type="Script" uid="uid://ox8bcosie5w4" path="res://Scripts/pause_ui.gd" id="3_6h5vk"]
+[ext_resource type="Script" uid="uid://25kya3hm1ipi" path="res://Scripts/background_audio_manager.gd" id="3_ikfsv"]
 [ext_resource type="AudioStream" uid="uid://b4nclsvi4tsra" path="res://Sounds/dragon-studio-door-slam-478362.mp3" id="4_1ixah"]
 [ext_resource type="Script" uid="uid://cs352dvsdfpre" path="res://Scripts/death_ui.gd" id="4_rgj8m"]
 [ext_resource type="AudioStream" uid="uid://d3qros5t17y3e" path="res://Sounds/alex_jauk-santa-laugh-02-279694.mp3" id="5_rgj8m"]
@@ -166,11 +168,20 @@ _data = {
 
 [node name="GameScene" type="Node2D" unique_id=563581599]
 
-[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_play_scene", "_pause_ui", "_death_ui")]
+[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_play_scene", "_pause_ui", "_death_ui", "_background_music")]
 script = ExtResource("1_b6fju")
 _play_scene = NodePath("../PlayScene")
 _pause_ui = NodePath("../PauseUI")
 _death_ui = NodePath("../DeathUI")
+_background_music = NodePath("../AudioStreamBackground")
+
+[node name="AudioStreamBackground" type="AudioStreamPlayer" parent="." unique_id=1078108552]
+stream = ExtResource("2_7iton")
+volume_db = -15.0
+pitch_scale = 0.7
+autoplay = true
+parameters/looping = true
+script = ExtResource("3_ikfsv")
 
 [node name="PlayScene" parent="." unique_id=114986873 instance=ExtResource("1_x87qo")]
 
@@ -196,11 +207,11 @@ horizontal_alignment = 1
 [node name="DeathUI" type="CanvasLayer" parent="." unique_id=354209970]
 script = ExtResource("4_rgj8m")
 
-[node name="AudioStreamDoorSlam" type="AudioStreamPlayer2D" parent="DeathUI" unique_id=1496685053]
+[node name="AudioStreamDoorSlam" type="AudioStreamPlayer" parent="DeathUI" unique_id=655996211]
 stream = ExtResource("4_1ixah")
 volume_db = 5.0
 
-[node name="AudioStreamSantaLaugh" type="AudioStreamPlayer2D" parent="DeathUI" unique_id=452314425]
+[node name="AudioStreamSantaLaugh" type="AudioStreamPlayer" parent="DeathUI" unique_id=1253539349]
 stream = ExtResource("5_rgj8m")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DeathUI" unique_id=577581573]

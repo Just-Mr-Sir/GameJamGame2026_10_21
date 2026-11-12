@@ -6,6 +6,8 @@ static var Instance:GameManager:
 		return _instance
 static var _instance:GameManager
 
+signal sig_game_over
+
 var Play_Scene:Node2D:
 	get:
 		return _play_scene
@@ -32,6 +34,7 @@ func game_over():
 	pause_game(true)
 	_death_ui.play_death_anim()
 	_is_game_over = true
+	sig_game_over.emit()
 
 func pause_game(do_pause:bool):
 	_play_scene.process_mode = (

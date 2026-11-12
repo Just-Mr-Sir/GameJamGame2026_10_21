@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://jqyv1pd72igv" path="res://Textures/fire_spritesheet.png" id="8_3cjv5"]
 [ext_resource type="PackedScene" uid="uid://c5hwycoo3prt1" path="res://Scenes/player.tscn" id="9_2kn3l"]
 [ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="10_8n5jp"]
+[ext_resource type="Script" uid="uid://bmili8ww4n64t" path="res://Scripts/progress_ui.gd" id="11_knw1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
 size = Vector2(151, 1975)
@@ -55,6 +56,16 @@ gradient = SubResource("Gradient_mntma")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohpam"]
 size = Vector2(1335, 130)
+
+[sub_resource type="Gradient" id="Gradient_blhi5"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1610577, 0.3533654, 0.36778846)
+colors = PackedColorArray(0.9843137, 0.43137255, 0, 1, 0.41960785, 0.09803922, 0.02745098, 1, 0.96, 0.044319935, 0.028799972, 1, 0.41960785, 0.09803922, 0.02745098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xcko5"]
+gradient = SubResource("Gradient_blhi5")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
 
 [node name="PlayScene" type="Node2D" unique_id=114986873 node_paths=PackedStringArray("_player", "_killing_floor")]
 script = ExtResource("1_blhi5")
@@ -159,6 +170,34 @@ _rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(512, 0)])
 [node name="Enemy4" parent="." unique_id=430580332 instance=ExtResource("10_8n5jp")]
 position = Vector2(727, -1923)
 _rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-256, 512), Vector2(256, 1024)])
+
+[node name="ProgressUI" type="CanvasLayer" parent="." unique_id=906704741 node_paths=PackedStringArray("_progress_texture", "_player", "_killing_floor")]
+script = ExtResource("11_knw1p")
+_progress_texture = NodePath("HBoxContainer/MarginContainer/TextureRect")
+_player = NodePath("../Player")
+_killing_floor = NodePath("../KillFloor")
+_y_end = -12000.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ProgressUI" unique_id=1587303112]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ProgressUI/HBoxContainer" unique_id=261150860]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="ProgressUI/HBoxContainer/MarginContainer" unique_id=1758887998]
+self_modulate = Color(1, 1, 1, 0.9019608)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_xcko5")
 
 [connection signal="body_entered" from="KillFloor" to="KillFloor" method="_on_body_entered"]
 [connection signal="body_exited" from="KillFloor" to="KillFloor" method="_on_body_exited"]

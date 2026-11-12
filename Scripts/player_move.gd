@@ -10,6 +10,7 @@ class_name PlayerMove
 @export var _min_jump_gravity = 0.5
 @export var _max_jump_gravity = 0.8
 @export var _gravity_lose_rate:float
+@export var _move_down_gravity:float = 3
 @export var _jump_force:float
 @export var _time_stunned:float = 1.
 
@@ -37,6 +38,8 @@ func _physics_process(delta: float) -> void:
 			elif Input.is_action_pressed("Jump") && velocity.y < 0:
 				_cur_gravity = max(_min_jump_gravity,
 					_cur_gravity - _gravity_lose_rate)
+			elif Input.is_action_just_pressed("MoveDown"):
+				_cur_gravity = _move_down_gravity
 			else:
 				_cur_gravity = _normal_gravity
 			

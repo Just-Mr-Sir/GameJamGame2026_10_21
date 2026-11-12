@@ -11,8 +11,10 @@ var Play_Scene:Node2D:
 		return _play_scene
 
 @export var _play_scene:Node2D
-@export var _pause_ui:CanvasLayer
-@export var _death_ui:CanvasLayer
+@export var _pause_ui:PauseUI
+@export var _death_ui:DeathUI
+
+var _is_game_over:bool = false
 
 func _ready():
 	if _instance == null:
@@ -20,10 +22,15 @@ func _ready():
 	else:
 		self.queue_free()
 
+func _input(event):
+	if _is_game_over && event.is_action_pressed("Restart"):
+		#quick and dirty method of restarting game
+		get_tree().call_deferred("reload_current_scene")
+
 func game_over():
 	pause_game(true)
-	var anim_player:AnimationPlayer = _death_ui.find_children("", "AnimationPlayer", false)[0]
-	anim_player.play("death_screen")
+	_death_ui.play_death_anim()
+	_is_game_over = true
 
 func pause_game(do_pause:bool):
 	_play_scene.process_mode = (
@@ -31,7 +38,3 @@ func pause_game(do_pause:bool):
 		
 	if _pause_ui:
 		_pause_ui.visible = do_pause
-
-func play_game():
-	_play_scene.process_mode = Node.PROCESS_MODE_INHERIT
-	_play_scene.visible = true

@@ -66,8 +66,9 @@ func free_below_camera():
 func generate_platform(y):
 	var newplatform = _platform_scene.instantiate()
 	newplatform.position.y = y
+	var platform_sprite:Node2D = newplatform.find_child("PlatformSprite")
 	newplatform.position.x = randi_range(0, \
-		camera.get_viewport_rect().size.x - newplatform.find_child("PlatformSprite").texture.get_width())
+		camera.get_viewport_rect().size.x - platform_sprite.texture.get_width() * platform_sprite.scale.x)
 	self.add_child(newplatform)
 	platformlist.append(newplatform)
 	

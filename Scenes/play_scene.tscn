@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://b453ounaypvu3"]
+
+[ext_resource type="Script" uid="uid://c27n2k7k2j0cc" path="res://Scripts/chimney.gd" id="1_blhi5"]
+[ext_resource type="PackedScene" uid="uid://orb2ddc52saq" path="res://Scenes/platform.tscn" id="2_knw1p"]
+[ext_resource type="PackedScene" uid="uid://dreskavxwad15" path="res://Scenes/platform_long.tscn" id="3_ivbpn"]
+[ext_resource type="PackedScene" uid="uid://cut3ual7jmcw1" path="res://Scenes/falling_object_spawner.tscn" id="4_io55t"]
+[ext_resource type="Texture2D" uid="uid://u3qx11iyvf6g" path="res://Textures/brick.png" id="5_45wvb"]
+[ext_resource type="Script" uid="uid://chlladqyrc7qq" path="res://Scripts/scrolling_background.gd" id="6_j3qlu"]
+[ext_resource type="Script" uid="uid://cdrk78qos0uqc" path="res://Scripts/killing_floor.gd" id="7_fbpj1"]
+[ext_resource type="Texture2D" uid="uid://jqyv1pd72igv" path="res://Textures/fire_spritesheet.png" id="8_3cjv5"]
+[ext_resource type="PackedScene" uid="uid://c5hwycoo3prt1" path="res://Scenes/player.tscn" id="9_2kn3l"]
+[ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="10_8n5jp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
+size = Vector2(151, 1975)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ah8b"]
+size = Vector2(1354.5, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mntma"]
+atlas = ExtResource("8_3cjv5")
+region = Rect2(0, 5, 1024, 510)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ght4j"]
+atlas = ExtResource("8_3cjv5")
+region = Rect2(0, 515, 1024, 510)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbqke"]
+atlas = ExtResource("8_3cjv5")
+region = Rect2(0, 1025, 1024, 510)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jdhvw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mntma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ght4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbqke")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_mntma"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jdhvw"]
+gradient = SubResource("Gradient_mntma")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohpam"]
+size = Vector2(1335, 130)
+
+[node name="PlayScene" type="Node2D" unique_id=114986873 node_paths=PackedStringArray("_player", "_killing_floor")]
+script = ExtResource("1_blhi5")
+_player = NodePath("Player")
+_killing_floor = NodePath("KillFloor")
+_platform_scenes = Array[PackedScene]([ExtResource("2_knw1p"), ExtResource("3_ivbpn")])
+_speed_per_second_increase = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1636065979]
+anchor_mode = 0
+
+[node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 instance=ExtResource("4_io55t")]
+position = Vector2(511, 0)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Camera2D" unique_id=1365871604]
+position = Vector2(2, 0)
+collision_mask = 0
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RigidBody2D" unique_id=993419942]
+position = Vector2(-78, -124.5)
+shape = SubResource("RectangleShape2D_44lo8")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Camera2D" unique_id=378762526]
+position = Vector2(-5, 0)
+collision_mask = 0
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/RigidBody2D2" unique_id=1066719875]
+position = Vector2(1232, -113)
+shape = SubResource("RectangleShape2D_44lo8")
+
+[node name="Background" type="Sprite2D" parent="Camera2D" unique_id=442146849 node_paths=PackedStringArray("_camera")]
+self_modulate = Color(0.42595553, 0.42595556, 0.42595538, 1)
+z_index = -1
+texture_repeat = 2
+position = Vector2(512, 344)
+texture = ExtResource("5_45wvb")
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 1024)
+script = ExtResource("6_j3qlu")
+_camera = NodePath("..")
+
+[node name="KillFloor" type="Area2D" parent="." unique_id=1610422669]
+position = Vector2(570, 635)
+script = ExtResource("7_fbpj1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillFloor" unique_id=1604415866]
+visible = false
+z_index = 1
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_4ah8b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="KillFloor" unique_id=1011570778]
+z_index = 1
+position = Vector2(0, -45)
+scale = Vector2(1.2, 0.3)
+sprite_frames = SubResource("SpriteFrames_jdhvw")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="KillFloor" unique_id=1290712883]
+z_index = 1
+position = Vector2(0, 394.99997)
+scale = Vector2(18.725, 11.575)
+texture = SubResource("GradientTexture2D_jdhvw")
+
+[node name="Player" parent="." unique_id=1440466538 instance=ExtResource("9_2kn3l")]
+position = Vector2(516, 324)
+
+[node name="TestGround" type="StaticBody2D" parent="." unique_id=649503687 groups=["Platform"]]
+position = Vector2(553, 448)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="TestGround" unique_id=2098127816]
+self_modulate = Color(1, 0.45490196, 0.2901961, 1)
+texture_repeat = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_45wvb")
+region_enabled = true
+region_rect = Rect2(0, 0, 7200, 512)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestGround" unique_id=2073753866]
+shape = SubResource("RectangleShape2D_ohpam")
+
+[node name="Enemy" parent="." unique_id=733030718 instance=ExtResource("10_8n5jp")]
+position = Vector2(521, -542)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-256, -256)])
+
+[node name="Enemy2" parent="." unique_id=1564647138 instance=ExtResource("10_8n5jp")]
+position = Vector2(677, -918)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-512, 0)])
+
+[node name="Enemy3" parent="." unique_id=597101456 instance=ExtResource("10_8n5jp")]
+position = Vector2(340, -1534)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(512, 0)])
+
+[node name="Enemy4" parent="." unique_id=430580332 instance=ExtResource("10_8n5jp")]
+position = Vector2(727, -1923)
+_rel_waypoints = Array[Vector2]([Vector2(0, 0), Vector2(-256, 512), Vector2(256, 1024)])
+
+[connection signal="body_entered" from="KillFloor" to="KillFloor" method="_on_body_entered"]
+[connection signal="body_exited" from="KillFloor" to="KillFloor" method="_on_body_exited"]

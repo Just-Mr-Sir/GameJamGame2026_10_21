@@ -20,7 +20,7 @@ func _on_body_entered(body:Node2D):
 			if _shards_scene != null:
 				var instance = _shards_scene.instantiate()
 				instance.global_position = self.global_position
-				get_tree().current_scene.call_deferred("add_child", instance)
+				GameManager.Instance.Play_Scene.call_deferred("add_child", instance)
 			
 			self.queue_free()
 			break

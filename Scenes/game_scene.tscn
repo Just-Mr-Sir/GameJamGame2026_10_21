@@ -1,7 +1,32 @@
 [gd_scene format=3 uid="uid://btlo4xuyt24ht"]
 
+[ext_resource type="Script" uid="uid://qp5tc5v057uy" path="res://Scripts/game_manager.gd" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://b453ounaypvu3" path="res://Scenes/play_scene.tscn" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://ox8bcosie5w4" path="res://Scripts/pause_ui.gd" id="3_6h5vk"]
 
 [node name="GameScene" type="Node2D" unique_id=563581599]
 
+[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_play_scene", "_pause_ui")]
+script = ExtResource("1_b6fju")
+_play_scene = NodePath("../PlayScene")
+_pause_ui = NodePath("../PauseUI")
+
 [node name="PlayScene" parent="." unique_id=114986873 instance=ExtResource("1_x87qo")]
+
+[node name="PauseUI" type="CanvasLayer" parent="." unique_id=1500769028]
+script = ExtResource("3_6h5vk")
+
+[node name="CenterContainer" type="CenterContainer" parent="PauseUI" unique_id=1169425756]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseUI/CenterContainer" unique_id=470244076]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "PAUSED"
+horizontal_alignment = 1

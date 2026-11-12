@@ -2,7 +2,7 @@ extends Node2D
 
 @export var _player:Node2D
 @export var _killing_floor:Node2D
-@export var _platform_scene:PackedScene
+@export var _platform_scenes:Array[PackedScene]
 @export var _speed_per_second_increase:float
 
 const base_speed = 50
@@ -16,6 +16,7 @@ var platform
 var camera: Camera2D
 var nextplatform
 var platformlist: Array
+var platform_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,6 +52,14 @@ func _process(delta):
 	
 	#increase speed of camera movement
 	speed_mod += _speed_per_second_increase * delta
+	
+	free_below_killzone()
+
+func free_below_killzone():
+	for i in platformlist:
+		if i.global_position.y >= _killing_floor.global_position.y:
+			platformlist.erase(i)
+			i.queue_free()
 
 #DEPRECATED
 func free_below_camera():
@@ -64,12 +73,12 @@ func free_below_camera():
 			_player.queue_free()
 
 func generate_platform(y):
-	var newplatform = _platform_scene.instantiate()
+	var newplatform = _platform_scenes[1 if platform_count % 10 == 0 else 0].instantiate()
 	newplatform.position.y = y
 	var platform_sprite:Node2D = newplatform.find_child("PlatformSprite")
-	newplatform.position.x = randi_range(0, \
-		camera.get_viewport_rect().size.x - platform_sprite.texture.get_width() * platform_sprite.scale.x)
+	newplatform.position.x = randi_range(0.5*platform_sprite.texture.get_width() * platform_sprite.scale.x, \
+		camera.get_viewport_rect().size.x - 0.5*platform_sprite.texture.get_width() * platform_sprite.scale.x)
 	self.add_child(newplatform)
 	platformlist.append(newplatform)
 	
-	pass
+	platform_count += 1

@@ -148,7 +148,7 @@ _min_jump_gravity = 0.65
 _max_jump_gravity = 1.0
 _gravity_lose_rate = 0.17
 _jump_force = 500.0
-_time_stunned = 0.5
+_time_stunned = 2.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=81291883]
 z_index = 2

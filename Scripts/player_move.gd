@@ -57,6 +57,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				#slow down to a stop
 				velocity.x = move_toward(velocity.x, 0, 20.)
+		else:
+			#slow down to a stop
+			velocity.x = move_toward(velocity.x, 0, 20.)
 		
 		play_animations()
 	

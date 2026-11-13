@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://4t4ykcfc7g70" path="res://Scripts/falling_object.gd" id="1_yw4xl"]
 [ext_resource type="PackedScene" uid="uid://bkrhvnlpcfa8w" path="res://Scenes/ornament_shards.tscn" id="2_q4kea"]
 [ext_resource type="Texture2D" uid="uid://bryy3ugixdnv4" path="res://Textures/ordament1.png" id="2_yw4xl"]
+[ext_resource type="AudioStream" uid="uid://biwgjs0uq2sx8" path="res://Sounds/freesound_community-glass-shatter-3-100155.mp3" id="3_yeq8k"]
+[ext_resource type="AudioStream" uid="uid://btpaxj3pl2htn" path="res://Sounds/blendertimer-glass-bottle-shatter-13847.mp3" id="4_5mt8j"]
+[ext_resource type="Script" uid="uid://33wps6p3iv6g" path="res://Scripts/audio_one_shot.gd" id="4_rgs3h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdhvw"]
 radius = 32.0
@@ -12,9 +15,13 @@ collision_mask = 3
 script = ExtResource("1_yw4xl")
 _hit_filters = Array[String](["Player", "Platform"])
 _shards_scene = ExtResource("2_q4kea")
+_break_sounds = Array[AudioStream]([ExtResource("3_yeq8k"), ExtResource("4_5mt8j")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=109958813]
 texture = ExtResource("2_yw4xl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=614354669]
 shape = SubResource("CircleShape2D_jdhvw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=226983077]
+script = ExtResource("4_rgs3h")

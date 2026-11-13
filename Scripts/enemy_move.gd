@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 class_name EnemyMove
 
 @export var _speed:float
@@ -32,13 +32,13 @@ func _process(delta:float):
 								else _next_waypoint_index + 1)
 		_cur_pause_time = 0
 
-func _move(delta:float) -> void:
+func _move(_delta:float) -> void:
 	if _rel_waypoints.size() == 0:
 		return
 	
 	var dir = _rel_waypoints[_next_waypoint_index] - _rel_pos
 	dir = dir.normalized()
-	self.global_position += _speed * delta * dir
+	self.linear_velocity = _speed * dir
 	
 	#snap to waypoint if enemy has "gone past" it
 	var from_index = _rel_waypoints.size()-1 if _next_waypoint_index == 0 else _next_waypoint_index-1

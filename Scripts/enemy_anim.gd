@@ -3,6 +3,7 @@ class_name EnemyAnim
 
 @export var _idle_anim_name:String
 @export var _do_flip_going_right:bool = false
+@export var _offset_on_flip:Vector2
 
 var _last_pos:Vector2
 
@@ -16,5 +17,10 @@ func _process(_delta: float) -> void:
 			self.flip_h = _do_flip_going_right
 		else:
 			self.flip_h = !_do_flip_going_right
+		
+		if self.flip_h:
+			self.offset = _offset_on_flip
+		else:
+			self.offset = Vector2.ZERO
 	
 	_last_pos.x = self.global_position.x

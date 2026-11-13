@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dgoqn6ek7briq"]
 
 [ext_resource type="Script" uid="uid://hlin3paso78b" path="res://Scripts/enemy_move.gd" id="1_1f0kj"]
-[ext_resource type="Script" uid="uid://cq31dnv6jymvt" path="res://Scripts/knockback_module.gd" id="2_afpow"]
 [ext_resource type="Texture2D" uid="uid://cudrdv2nwwbko" path="res://Textures/turkey1.png" id="3_287tu"]
 [ext_resource type="Texture2D" uid="uid://cjywf526ptw73" path="res://Textures/turkey2.png" id="4_0830c"]
 [ext_resource type="Script" uid="uid://38d1df1lxe8s" path="res://Scripts/enemy_anim.gd" id="5_0830c"]
@@ -21,41 +20,30 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afpow"]
-size = Vector2(28, 18)
+size = Vector2(50, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
-size = Vector2(4, 30)
-
-[node name="Enemy" type="Area2D" unique_id=733030718]
+[node name="Enemy" type="RigidBody2D" unique_id=100930813]
+collision_mask = 0
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 20
 script = ExtResource("1_1f0kj")
 _speed = 128.0
-_waypoint_pause_length = 5.0
-
-[node name="KnockbackModule" type="Node2D" parent="." unique_id=514324894 node_paths=PackedStringArray("_area2d")]
-script = ExtResource("2_afpow")
-_area2d = NodePath("..")
-_hit_filters = Array[String](["Player"])
-_bounce_force = 200.0
+_rel_waypoints = Array[Vector2]([Vector2(0, 250), Vector2(0, -500)])
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=555842820]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_1f0kj")
 animation = &"turkey"
-frame_progress = 0.9814106
+frame = 1
+frame_progress = 0.09476155
 script = ExtResource("5_0830c")
 _idle_anim_name = "turkey"
+_offset_on_flip = Vector2(-27, 0)
 
 [node name="BodyCollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292482613]
-position = Vector2(-14, 10)
+position = Vector2(-27, 18)
 shape = SubResource("RectangleShape2D_afpow")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="." unique_id=281672935]
-position = Vector2(-14, 0)
-gravity_scale = 0.0
-contact_monitor = true
-max_contacts_reported = 100
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1532871269]
-rotation = 1.5707964
-shape = SubResource("RectangleShape2D_287tu")
-one_way_collision = true
-one_way_collision_direction = Vector2(1, 0)

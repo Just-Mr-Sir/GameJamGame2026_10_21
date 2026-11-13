@@ -154,7 +154,6 @@ script = ExtResource("10_io55t")
 _audio_stream = NodePath(".")
 _listener = NodePath("../../Player")
 _producer = NodePath("..")
-_db_start = 5
 
 [node name="Player" parent="." unique_id=1440466538 instance=ExtResource("9_2kn3l")]
 position = Vector2(516, 324)

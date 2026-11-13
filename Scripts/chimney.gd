@@ -1,9 +1,11 @@
 extends Node2D
+class_name Chimney
 
 @export var _player:Node2D
 @export var _killing_floor:Node2D
 @export var _platform_scenes:Array[PackedScene]
 @export var _speed_per_second_increase:float
+@export var _progress_tracker:ProgressTracker
 
 const base_speed = 50
 const jumpheight = 140
@@ -31,7 +33,8 @@ func _ready():
 func _process(delta):
 	# Move objects and background down at a constant speed
 	camera.position.y = camera.position.y - speed * delta
-	if camera.position.y - jumpheight * 2 <= -nextplatform:
+	if (camera.position.y - jumpheight * 2 <= -nextplatform &&
+		-nextplatform-jumpheight > _progress_tracker.Y_End):
 		generate_platform(-nextplatform)
 		nextplatform += jumpheight
 	

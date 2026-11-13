@@ -105,3 +105,9 @@ func die():
 	_cur_gravity = _normal_gravity
 	velocity.x = 0
 	$AudioStreamPlayer2D.playing = true
+
+func win():
+	_cur_stun_time = 99999
+	velocity = Vector2.ZERO
+	_cur_gravity = 0
+	_anim_sprite.play("idle")

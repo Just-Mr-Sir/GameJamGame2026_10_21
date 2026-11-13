@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="10_8n5jp"]
 [ext_resource type="Script" uid="uid://bb5q03soo7aip" path="res://Scripts/audio_fade.gd" id="10_io55t"]
 [ext_resource type="Script" uid="uid://bmili8ww4n64t" path="res://Scripts/progress_ui.gd" id="11_knw1p"]
+[ext_resource type="Texture2D" uid="uid://cblt7m5m4286k" path="res://Textures/rooftop.png" id="16_3cjv5"]
+[ext_resource type="Script" uid="uid://c0crr88e6k1yy" path="res://Scripts/win_area.gd" id="16_fbpj1"]
 
 [sub_resource type="Curve" id="Curve_fbpj1"]
 _limits = [0.0, 3.0, 0.0, 1.0]
@@ -81,12 +83,77 @@ gradient = SubResource("Gradient_blhi5")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[node name="PlayScene" type="Node2D" unique_id=114986873 node_paths=PackedStringArray("_player", "_killing_floor")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdhvw"]
+size = Vector2(1318, 144)
+
+[sub_resource type="Animation" id="Animation_2kn3l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MarginContainer/VBoxContainer/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MarginContainer/VBoxContainer/Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3cjv5"]
+resource_name = "default"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/MarginContainer/VBoxContainer/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/MarginContainer/VBoxContainer/Label2:modulate")
+tracks/1/interp = 0
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kn3l"]
+_data = {
+&"RESET": SubResource("Animation_2kn3l"),
+&"default": SubResource("Animation_3cjv5")
+}
+
+[node name="PlayScene" type="Node2D" unique_id=114986873 node_paths=PackedStringArray("_player", "_killing_floor", "_progress_tracker")]
 script = ExtResource("1_blhi5")
 _player = NodePath("Player")
 _killing_floor = NodePath("KillFloor")
 _platform_scenes = Array[PackedScene]([ExtResource("2_knw1p"), ExtResource("3_ivbpn")])
 _speed_per_second_increase = 0.1
+_progress_tracker = NodePath("Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1636065979 node_paths=PackedStringArray("_player")]
 anchor_mode = 0
@@ -219,5 +286,70 @@ self_modulate = Color(1, 1, 1, 0.9019608)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_xcko5")
 
+[node name="WinArea" type="Area2D" parent="." unique_id=247002268 node_paths=PackedStringArray("_progress_tracker", "_win_spot", "_hard_stoppers", "_kill_floor", "_chimney", "_camera", "_anim_player")]
+position = Vector2(511, 0)
+script = ExtResource("16_fbpj1")
+_progress_tracker = NodePath("../Camera2D")
+_win_spot = NodePath("WinSpot")
+_hard_stoppers = [NodePath("../Camera2D/FallingObjectSpawner"), NodePath("../Camera2D/TurkeySpawner"), NodePath("../ProgressUI")]
+_kill_floor = NodePath("../KillFloor")
+_chimney = NodePath("..")
+_camera = NodePath("../Camera2D")
+_anim_player = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea" unique_id=128733113]
+position = Vector2(0, -49)
+shape = SubResource("RectangleShape2D_jdhvw")
+
+[node name="Sprite2D" type="Sprite2D" parent="WinArea" unique_id=1898583613]
+position = Vector2(0, -294)
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("16_3cjv5")
+
+[node name="WinSpot" type="Marker2D" parent="WinArea" unique_id=1805800033]
+position = Vector2(-18, -39)
+gizmo_extents = 42.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WinArea" unique_id=1933074909]
+libraries/ = SubResource("AnimationLibrary_2kn3l")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="WinArea" unique_id=2014776452]
+
+[node name="MarginContainer" type="MarginContainer" parent="WinArea/CanvasLayer" unique_id=327433784]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinArea/CanvasLayer/MarginContainer" unique_id=1228813511]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WinArea/CanvasLayer/MarginContainer/VBoxContainer" unique_id=76312110]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.83333325, 1, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "YOU ESCAPED
+CHRISTMAS IS SAVED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="WinArea/CanvasLayer/MarginContainer/VBoxContainer" unique_id=1459438906]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "
+Press 'R' to go to the next house"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="KillFloor" to="KillFloor" method="_on_body_entered"]
 [connection signal="body_exited" from="KillFloor" to="KillFloor" method="_on_body_exited"]
+[connection signal="body_entered" from="WinArea" to="WinArea" method="_on_body_entered"]

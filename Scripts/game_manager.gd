@@ -60,6 +60,10 @@ func game_over():
 	_is_game_over = true
 	sig_game_over.emit()
 
+func game_win():
+	_background_music.playing = false
+	_is_game_over = true
+
 func pause_game(do_pause:bool, show_ui:bool=true):
 	if _is_game_over || _main_menu_ui.IsActive:
 		return

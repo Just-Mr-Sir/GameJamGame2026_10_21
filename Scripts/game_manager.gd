@@ -40,6 +40,7 @@ func _input(event):
 func start_game():
 	_is_game_over = false
 	_death_ui.reset()
+	_background_music.restart()
 	
 	#check if game is started from main menu
 	if _main_menu_ui.IsActive:

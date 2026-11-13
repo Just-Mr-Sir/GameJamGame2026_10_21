@@ -314,7 +314,6 @@ _background_music = NodePath("../AudioStreamBackground")
 stream = ExtResource("2_7iton")
 volume_db = -15.0
 pitch_scale = 0.7
-autoplay = true
 parameters/looping = true
 script = ExtResource("3_ikfsv")
 

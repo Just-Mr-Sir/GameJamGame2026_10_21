@@ -6,9 +6,12 @@ extends AudioStreamPlayer
 
 func _ready():
 	self.pitch_scale = _pitch_scale_min
-	self.playing = true
 
 func _process(delta: float):
 	if self.playing:
 		self.pitch_scale = min(_pitch_scale_max,
 			self.pitch_scale + _pitch_scale_per_second*delta)
+
+func restart():
+	self.play(0.)
+	self.pitch_scale = _pitch_scale_min

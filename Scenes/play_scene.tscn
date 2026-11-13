@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://cdrk78qos0uqc" path="res://Scripts/killing_floor.gd" id="7_fbpj1"]
 [ext_resource type="Texture2D" uid="uid://jqyv1pd72igv" path="res://Textures/fire_spritesheet.png" id="8_3cjv5"]
 [ext_resource type="PackedScene" uid="uid://c5hwycoo3prt1" path="res://Scenes/player.tscn" id="9_2kn3l"]
+[ext_resource type="AudioStream" uid="uid://qmy5nnrhtimr" path="res://Sounds/maxhammarback-fire-sound-efftect-21991.mp3" id="9_ivbpn"]
 [ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="10_8n5jp"]
+[ext_resource type="Script" uid="uid://bb5q03soo7aip" path="res://Scripts/audio_fade.gd" id="10_io55t"]
 [ext_resource type="Script" uid="uid://bmili8ww4n64t" path="res://Scripts/progress_ui.gd" id="11_knw1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
@@ -135,6 +137,16 @@ z_index = 1
 position = Vector2(0, 394.99997)
 scale = Vector2(18.725, 11.575)
 texture = SubResource("GradientTexture2D_jdhvw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="KillFloor" unique_id=526238978 node_paths=PackedStringArray("_audio_stream", "_listener", "_producer")]
+stream = ExtResource("9_ivbpn")
+autoplay = true
+parameters/looping = true
+script = ExtResource("10_io55t")
+_audio_stream = NodePath(".")
+_listener = NodePath("../../Player")
+_producer = NodePath("..")
+_db_start = 5
 
 [node name="Player" parent="." unique_id=1440466538 instance=ExtResource("9_2kn3l")]
 position = Vector2(516, 324)

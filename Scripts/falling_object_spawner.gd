@@ -18,4 +18,5 @@ func _spawn_item():
 					randi_range(0, _falling_objects.size()-1)
 					].instantiate()
 	instance.global_position.x = randf_range(-1, 1) * _spawn_area_width
-	self.add_child(instance)
+	instance.global_position.y = self.global_position.y
+	GameManager.Instance.Play_Scene.add_child(instance)

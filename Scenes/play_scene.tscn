@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://orb2ddc52saq" path="res://Scenes/platform.tscn" id="2_knw1p"]
 [ext_resource type="PackedScene" uid="uid://dreskavxwad15" path="res://Scenes/platform_long.tscn" id="3_ivbpn"]
 [ext_resource type="PackedScene" uid="uid://cut3ual7jmcw1" path="res://Scenes/falling_object_spawner.tscn" id="4_io55t"]
+[ext_resource type="Script" uid="uid://ci6ptys7rskbb" path="res://Scripts/progress_tracker.gd" id="4_j3qlu"]
 [ext_resource type="Texture2D" uid="uid://u3qx11iyvf6g" path="res://Textures/brick.png" id="5_45wvb"]
 [ext_resource type="Script" uid="uid://cntrmgold7q1k" path="res://Scripts/falling_object_spawner.gd" id="5_io55t"]
 [ext_resource type="Script" uid="uid://chlladqyrc7qq" path="res://Scripts/scrolling_background.gd" id="6_j3qlu"]
@@ -14,6 +15,16 @@
 [ext_resource type="PackedScene" uid="uid://dgoqn6ek7briq" path="res://Scenes/enemy.tscn" id="10_8n5jp"]
 [ext_resource type="Script" uid="uid://bb5q03soo7aip" path="res://Scripts/audio_fade.gd" id="10_io55t"]
 [ext_resource type="Script" uid="uid://bmili8ww4n64t" path="res://Scripts/progress_ui.gd" id="11_knw1p"]
+
+[sub_resource type="Curve" id="Curve_fbpj1"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.50482315, 2.0769234), -1.435386, -1.435386, 0, 0, Vector2(0.977492, 0.6153846), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_3cjv5"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 6.9871793), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44lo8"]
 size = Vector2(151, 1975)
@@ -75,27 +86,27 @@ script = ExtResource("1_blhi5")
 _player = NodePath("Player")
 _killing_floor = NodePath("KillFloor")
 _platform_scenes = Array[PackedScene]([ExtResource("2_knw1p"), ExtResource("3_ivbpn")])
-_speed_per_second_increase = 0.3
+_speed_per_second_increase = 0.1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1636065979]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1636065979 node_paths=PackedStringArray("_player")]
 anchor_mode = 0
+script = ExtResource("4_j3qlu")
+_player = NodePath("../Player")
 
-[node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 instance=ExtResource("4_io55t")]
+[node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 node_paths=PackedStringArray("_progress_tracker") instance=ExtResource("4_io55t")]
 position = Vector2(511, 0)
-_flat_spawntime = 2.5
+_spawntime_curve = SubResource("Curve_fbpj1")
+_progress_tracker = NodePath("..")
 _initial_delay = 10.0
-_time_til_spawntime_decrease = 10.0
-_spawntime_decrease_amount = 0.1
 
-[node name="TurkeySpawner" type="Node2D" parent="Camera2D" unique_id=2087329851]
+[node name="TurkeySpawner" type="Node2D" parent="Camera2D" unique_id=2087329851 node_paths=PackedStringArray("_progress_tracker")]
 position = Vector2(0, -124)
 script = ExtResource("5_io55t")
 _falling_objects = Array[PackedScene]([ExtResource("10_8n5jp")])
-_flat_spawntime = 10.0
-_initial_delay = 20.0
-_time_til_spawntime_decrease = 20.0
-_spawntime_decrease_amount = 0.3
+_spawntime_curve = SubResource("Curve_3cjv5")
+_progress_tracker = NodePath("..")
 _spawn_area_width = 1000.0
+_initial_delay = 20.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Camera2D" unique_id=1365871604]
 position = Vector2(2, 0)
@@ -135,7 +146,6 @@ position = Vector2(570, 635)
 script = ExtResource("7_fbpj1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillFloor" unique_id=1604415866]
-visible = false
 z_index = 1
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_4ah8b")
@@ -181,12 +191,12 @@ region_rect = Rect2(0, 0, 7200, 512)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestGround" unique_id=2073753866]
 shape = SubResource("RectangleShape2D_ohpam")
 
-[node name="ProgressUI" type="CanvasLayer" parent="." unique_id=906704741 node_paths=PackedStringArray("_progress_texture", "_player", "_killing_floor")]
+[node name="ProgressUI" type="CanvasLayer" parent="." unique_id=906704741 node_paths=PackedStringArray("_progress_texture", "_player", "_killing_floor", "_progress_tracker")]
 script = ExtResource("11_knw1p")
 _progress_texture = NodePath("HBoxContainer/MarginContainer/TextureRect")
 _player = NodePath("../Player")
 _killing_floor = NodePath("../KillFloor")
-_y_end = -12000.0
+_progress_tracker = NodePath("../Camera2D")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ProgressUI" unique_id=1587303112]
 anchors_preset = 15

@@ -75,19 +75,26 @@ script = ExtResource("1_blhi5")
 _player = NodePath("Player")
 _killing_floor = NodePath("KillFloor")
 _platform_scenes = Array[PackedScene]([ExtResource("2_knw1p"), ExtResource("3_ivbpn")])
-_speed_per_second_increase = 0.5
+_speed_per_second_increase = 0.3
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1636065979]
 anchor_mode = 0
 
 [node name="FallingObjectSpawner" parent="Camera2D" unique_id=302635137 instance=ExtResource("4_io55t")]
 position = Vector2(511, 0)
+_flat_spawntime = 2.5
+_initial_delay = 10.0
+_time_til_spawntime_decrease = 10.0
+_spawntime_decrease_amount = 0.1
 
 [node name="TurkeySpawner" type="Node2D" parent="Camera2D" unique_id=2087329851]
 position = Vector2(0, -124)
 script = ExtResource("5_io55t")
 _falling_objects = Array[PackedScene]([ExtResource("10_8n5jp")])
 _flat_spawntime = 10.0
+_initial_delay = 20.0
+_time_til_spawntime_decrease = 20.0
+_spawntime_decrease_amount = 0.3
 _spawn_area_width = 1000.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Camera2D" unique_id=1365871604]

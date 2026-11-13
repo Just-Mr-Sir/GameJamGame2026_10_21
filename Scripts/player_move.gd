@@ -15,7 +15,6 @@ class_name PlayerMove
 
 var _cur_stun_time:float
 var _cur_gravity:float
-var _is_bounced:bool = false
 var _is_dead:bool = false
 var _death_timer:float = 1.
 
@@ -30,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta * _cur_gravity
 	
 	if !_is_dead:
-		if !_is_bounced && _cur_stun_time < 0:
+		if _cur_stun_time < 0:
 			_confusion_sprite.visible = false
 			
 			# Handle jumping
@@ -64,15 +63,12 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("MoveDown"):
 				velocity.x *= 0.98
 				_cur_gravity = 1.2
-			
 		else:
-			#slow down to a stop
-			velocity.x = move_toward(velocity.x, 0, 20.)
+			velocity.x *= 0.95
 		
 		play_animations()
 	
 	move_and_slide()
-	try_stop_bounced()
 
 func play_animations():
 	if Input.is_action_just_pressed("Jump"):
@@ -84,14 +80,6 @@ func play_animations():
 			_anim_sprite.play("walk")
 		else:
 			_anim_sprite.play("idle")
-
-func become_bounced():
-	_is_bounced = true
-
-func try_stop_bounced():
-	#stops being bounced if has collided with anything
-	if get_slide_collision_count() > 0:
-		_is_bounced = false
 
 func stun():
 	_cur_stun_time = _time_stunned

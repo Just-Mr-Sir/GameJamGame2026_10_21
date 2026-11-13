@@ -4,7 +4,7 @@ class_name ProgressUI
 @export var _progress_texture:TextureRect
 @export var _player:Node2D
 @export var _killing_floor:Node2D
-@export var _y_end:float
+@export var _progress_tracker:ProgressTracker
 
 var _y_start:float
 #width as a percentage of total length
@@ -20,12 +20,12 @@ func _ready():
 func _process(_delta):
 	var diff1 = abs(_killing_floor.global_position.y - _y_start)
 	var diff2 = diff1 + abs(_player.global_position.y - _killing_floor.global_position.y)
-	var diff3 = diff2 + _player_line_width * abs(_y_end-_y_start)
+	var diff3 = diff2 + _player_line_width * abs(_progress_tracker.Y_End-_y_start)
 	_gradient.offsets = PackedFloat32Array([
 		0,
-		diff1 / abs(_y_end),
-		diff2 / abs(_y_end),
-		diff3 / abs(_y_end)
+		diff1 / abs(_progress_tracker.Y_End),
+		diff2 / abs(_progress_tracker.Y_End),
+		diff3 / abs(_progress_tracker.Y_End)
 		])
 
 func _on_game_over():

@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b4nclsvi4tsra" path="res://Sounds/dragon-studio-door-slam-478362.mp3" id="4_1ixah"]
 [ext_resource type="Script" uid="uid://cs352dvsdfpre" path="res://Scripts/death_ui.gd" id="4_rgj8m"]
 [ext_resource type="AudioStream" uid="uid://d3qros5t17y3e" path="res://Sounds/alex_jauk-santa-laugh-02-279694.mp3" id="5_rgj8m"]
+[ext_resource type="Script" uid="uid://dawxpt4hcik6n" path="res://Scripts/main_menu_ui.gd" id="9_ikfsv"]
 
 [sub_resource type="Animation" id="Animation_6h5vk"]
 length = 0.001
@@ -166,13 +167,147 @@ _data = {
 &"death_screen": SubResource("Animation_fiftr")
 }
 
+[sub_resource type="Animation" id="Animation_7iton"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRectLeft:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRectRight:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/MarginContainer/VBoxContainer2/Button:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ikfsv"]
+resource_name = "start_game"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRectLeft:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(600, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRectRight:custom_minimum_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(600, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HBoxContainer/MarginContainer/VBoxContainer2/Button:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5dgvu"]
+_data = {
+&"RESET": SubResource("Animation_7iton"),
+&"start_game": SubResource("Animation_ikfsv")
+}
+
 [node name="GameScene" type="Node2D" unique_id=563581599]
 
-[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_play_scene", "_pause_ui", "_death_ui", "_background_music")]
+[node name="GameManager" type="Node" parent="." unique_id=1578654217 node_paths=PackedStringArray("_pause_ui", "_death_ui", "_main_menu_ui", "_background_music")]
 script = ExtResource("1_b6fju")
-_play_scene = NodePath("../PlayScene")
+_play_scene_prefab = ExtResource("1_x87qo")
 _pause_ui = NodePath("../PauseUI")
 _death_ui = NodePath("../DeathUI")
+_main_menu_ui = NodePath("../MainMenuUI")
 _background_music = NodePath("../AudioStreamBackground")
 
 [node name="AudioStreamBackground" type="AudioStreamPlayer" parent="." unique_id=1078108552]
@@ -182,8 +317,6 @@ pitch_scale = 0.7
 autoplay = true
 parameters/looping = true
 script = ExtResource("3_ikfsv")
-
-[node name="PlayScene" parent="." unique_id=114986873 instance=ExtResource("1_x87qo")]
 
 [node name="PauseUI" type="CanvasLayer" parent="." unique_id=1500769028]
 visible = false
@@ -265,3 +398,62 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="MainMenuUI" type="CanvasLayer" parent="." unique_id=934802162]
+visible = false
+script = ExtResource("9_ikfsv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenuUI" unique_id=1002941721]
+libraries/ = SubResource("AnimationLibrary_5dgvu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuUI" unique_id=1558249766]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuUI/HBoxContainer" unique_id=1179089433]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuUI/HBoxContainer" unique_id=1234863026]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 100
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainMenuUI/HBoxContainer/MarginContainer" unique_id=1012162942]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Label" parent="MainMenuUI/HBoxContainer/MarginContainer/VBoxContainer2" unique_id=414320402]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+text = "Press Any Key to Start"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainMenuUI/HBoxContainer" unique_id=45614331]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRectLeft" type="ColorRect" parent="MainMenuUI" unique_id=1177082861]
+custom_minimum_size = Vector2(600, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRectRight" type="ColorRect" parent="MainMenuUI" unique_id=314415999]
+custom_minimum_size = Vector2(600, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainMenuUI" unique_id=2086665264]
+stream = ExtResource("4_1ixah")
